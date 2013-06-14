@@ -16,6 +16,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActionBar.LayoutParams;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 
 import android.os.Bundle;
@@ -66,7 +67,8 @@ public class ContentActivity extends Activity implements OnTouchListener {
 	// 记录用户的选项.双击改变
 	private boolean isScroll = Globals.prefs_autoScroll;
 	private GestureDetector gestureDetector;
-
+	private SharedPreferences setting;
+	private String link;
 	// 菜单
 	private PopupWindow popWindow;
 	private MenuAdapter menuAdapter;
@@ -88,7 +90,7 @@ public class ContentActivity extends Activity implements OnTouchListener {
 		initContent();
 		initTouch();
 		initPopWindows();// 初始化菜单
-
+		readPreference();
 		// if (DebugTest.DEBUG_MODE == true) {
 		// // 打印当前时间与启动时间的差
 		// Log.v(LOGTAG, "ArticleActivity:" + DebugTest.getCurrentTimePass());
@@ -119,6 +121,7 @@ public class ContentActivity extends Activity implements OnTouchListener {
 			} else {
 				Globals.itemId = (int) b.getLong("id");
 				Globals.prefs_recent_link = b.getString("link");
+				link = b.getString("link");
 				title = b.getString("title");
 				theStory = "\n" + b.getString("description");
 			}
@@ -259,6 +262,7 @@ public class ContentActivity extends Activity implements OnTouchListener {
 
 		// 记录阅读进度
 		scrollPosition = scroll.getScrollY();
+		writePreference();
 		Log.v(LOGTAG, "scrollPosition: " + scrollPosition);
 		if (DEBUG_MODE) {
 			Log.v(LOGTAG, "scrollPosition: " + scrollPosition);
@@ -521,6 +525,32 @@ public class ContentActivity extends Activity implements OnTouchListener {
 		// 随便加一个显示的项目.并不会显示出来
 		menu.add("menu");
 		return super.onPrepareOptionsMenu(menu);
+	}
+
+	/**
+	 * 读取设置
+	 */
+	private void readPreference() {
+
+		setting = this.getSharedPreferences("content", 0);
+
+		scrollPosition = setting.getInt(link, -1);
+		Log.v(LOGTAG, "read preferenct:scrollPosition  " + scrollPosition);
+		scrollHandler.sendEmptyMessageDelayed(SCROLLTO, 1000);
+
+	}
+
+	/**
+	 * 写入设置
+	 */
+	private void writePreference() {
+
+		SharedPreferences.Editor editor = setting.edit();
+
+		editor.putInt(link, scrollPosition);
+
+		editor.commit();
+
 	}
 
 }
