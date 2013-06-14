@@ -49,6 +49,9 @@ public class ContentActivity extends Activity implements OnTouchListener {
 	private final static String LOGTAG = "showDescription";
 	private final static boolean DEBUG_MODE = false;
 
+	private final static int LOOP = 0x1; // 字幕循环
+	private final static int SCROLLTO = 0x2;// 滚动到指定位置
+
 	private TextView txt_title;
 	private TextView txt_descript;
 
@@ -160,10 +163,21 @@ public class ContentActivity extends Activity implements OnTouchListener {
 		@Override
 		public void handleMessage(Message msg) {
 
-			doScroll();
+			switch (msg.what) {
+			case LOOP:
+				doScroll();
 
-			// 循环
-			scrollHandler.sendEmptyMessageDelayed(0, 55 - scrollSpeed * 5);
+				// 循环
+				scrollHandler.sendEmptyMessageDelayed(LOOP,
+						55 - scrollSpeed * 5);
+
+				break;
+			case SCROLLTO:
+				// scroll.scrollTo(0, scrollPosition);
+				scroll.smoothScrollTo(0, scrollPosition);
+				break;
+			}
+
 		}
 
 	};
@@ -195,11 +209,11 @@ public class ContentActivity extends Activity implements OnTouchListener {
 		public boolean onDoubleTap(MotionEvent e) {
 
 			if (isScroll) {
-				scrollHandler.removeMessages(0);
+				scrollHandler.removeMessages(LOOP);
 				isScroll = false;
 				Globals.prefs_autoScroll = false;
 			} else {
-				scrollHandler.sendEmptyMessage(0);
+				scrollHandler.sendEmptyMessage(LOOP);
 				isScroll = true;
 				Globals.prefs_autoScroll = true;
 			}
@@ -241,7 +255,7 @@ public class ContentActivity extends Activity implements OnTouchListener {
 		// ument
 		MobclickAgent.onPause(this);
 		Log.v(LOGTAG, "onPause()");
-		scrollHandler.removeMessages(0);
+		scrollHandler.removeMessages(LOOP);
 
 		// 记录阅读进度
 		scrollPosition = scroll.getScrollY();
@@ -262,7 +276,7 @@ public class ContentActivity extends Activity implements OnTouchListener {
 		// 恢复进度
 		scroll.setScrollY(scrollPosition);
 		if (isScroll) {
-			scrollHandler.sendEmptyMessage(0);
+			scrollHandler.sendEmptyMessage(LOOP);
 		}
 		super.onResume();
 	}
