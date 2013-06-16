@@ -107,7 +107,7 @@ public class ArticleActivity extends Activity implements OnItemClickListener {
 		setContentView(R.layout.article_layout);
 
 		Globals.NETWORK_ENABLE = Network.isConnect(this);// 判断网络
-		
+
 		if (Globals.AD_MODE && Globals.NETWORK_ENABLE) {
 			// 有网络的情况下才加载广告
 			initADView();
@@ -184,9 +184,8 @@ public class ArticleActivity extends Activity implements OnItemClickListener {
 						// 时间相同,不需要更新
 						progressDialog.cancel();
 						uiHandler.sendEmptyMessage(1);
-						if (DEBUG_MODE) {
-							Log.v(LOGTAG, lastModifyDate);
-						}
+
+						Log.v(LOGTAG, lastModifyDate);
 
 						return;
 					}
@@ -215,7 +214,7 @@ public class ArticleActivity extends Activity implements OnItemClickListener {
 
 	public void updateLocalContent() {
 		try {
-			InputStream is = getAssets().open("data/war.xml");
+			InputStream is = getAssets().open("data/war3.xml");
 			rssList = XmlParseUtil.getRssDate(is);
 
 			dbManager.deleteAll();
@@ -720,7 +719,7 @@ public class ArticleActivity extends Activity implements OnItemClickListener {
 
 		setting = this.getSharedPreferences("setting", 0);
 
-		Globals.prefs_isFirstRun = setting.getBoolean("isfirstrun",
+		Globals.prefs_isFirstRun = setting.getBoolean("isfirstrunv3",
 				Globals.prefs_isFirstRun);
 		Globals.prefs_autoScroll = setting.getBoolean("autoscroll",
 				Globals.prefs_autoScroll);
@@ -743,7 +742,7 @@ public class ArticleActivity extends Activity implements OnItemClickListener {
 
 		SharedPreferences.Editor editor = setting.edit();
 
-		editor.putBoolean("isfirstrun", Globals.prefs_isFirstRun);
+		editor.putBoolean("isfirstrunv3", Globals.prefs_isFirstRun);
 		editor.putBoolean("autoscroll", Globals.prefs_autoScroll);
 		editor.putInt("category", Globals.prefs_categoryIndex);
 		editor.putString("link", Globals.prefs_recent_link);

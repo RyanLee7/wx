@@ -10,22 +10,15 @@ public class Globals {
 	public static String prefs_recent_link = "";// 最近阅读url,写入系统设置
 
 	// 本地内容的rss源更新时间,在用户点击刷新按钮时,用来判断本地更新时间与服务器上rss的更新时间
-	public static String prefs_last_modify_date = "Sat, 01 Jun 2013 15:50:09 GMT";
+	public static String prefs_last_modify_date = "Sun, 16 Jun 2013 08:46:13 GMT";
 
-	// xinhai
-	// 05-15 17:53:25.414: V/MainActivity(7987): has update.Tue, 14 May 2013
-	// 09:12:46 GMT
-	//
-
-	// war
-	// 06-04 10:48:36.675: V/MainActivity(6180): has update.Sat, 01 Jun 2013
-	// 15:50:09 GMT
+	// 06-16 16:51:14.507: V/MainActivity(12218): Sun, 16 Jun 2013 08:46:13 GMT
 
 	public static int itemId;// 正在阅读文章的ID,用来实现"上一篇,下一篇"功能
 
 	public static final boolean AD_MODE = true;// 是否开启广告
 	public static boolean NETWORK_ENABLE = false;// 网络状态
-	
+
 	public static final String AD_KEY = "zr2lu80qpxc818";// 果盟广告KEY
 	public final static String RSS_URL = "http://www.60hy.com/war/?feed=rss2";
 	// 百度魔兽同人小说吧

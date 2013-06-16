@@ -90,6 +90,8 @@ public class ContentActivity extends Activity implements OnTouchListener {
 
 		if (Globals.AD_MODE && Globals.NETWORK_ENABLE) {
 			initADView();
+
+			
 		}
 		initContent();
 		initTouch();
