@@ -24,6 +24,8 @@ public class Globals {
 	public static int itemId;// 正在阅读文章的ID,用来实现"上一篇,下一篇"功能
 
 	public static final boolean AD_MODE = true;// 是否开启广告
+	public static boolean NETWORK_ENABLE = false;// 网络状态
+	
 	public static final String AD_KEY = "zr2lu80qpxc818";// 果盟广告KEY
 	public final static String RSS_URL = "http://www.60hy.com/war/?feed=rss2";
 	// 百度魔兽同人小说吧

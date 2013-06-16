@@ -15,6 +15,7 @@ import com.ryan.rss.war.menu.MenuAdapter;
 import com.ryan.rss.war.menu.MenuInfo;
 import com.ryan.rss.war.menu.MenuUtils;
 import com.ryan.rss.war.util.Globals;
+import com.ryan.rss.war.util.Network;
 import com.ryan.rss.war.util.RSSItem;
 import com.ryan.rss.war.R;
 
@@ -105,7 +106,10 @@ public class ArticleActivity extends Activity implements OnItemClickListener {
 
 		setContentView(R.layout.article_layout);
 
-		if (Globals.AD_MODE) {
+		Globals.NETWORK_ENABLE = Network.isConnect(this);// 判断网络
+		
+		if (Globals.AD_MODE && Globals.NETWORK_ENABLE) {
+			// 有网络的情况下才加载广告
 			initADView();
 		}
 		readPreference();

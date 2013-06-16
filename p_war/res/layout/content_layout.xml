@@ -1,39 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/content_linearlayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/content_bg"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/txt_title"
+    <LinearLayout
+        android:id="@+id/content_linearlayout"
         android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:background="@color/yellow"
-        android:gravity="center"
-        android:textSize="25sp" />
-
-    <ScrollView
-        android:id="@+id/scroll"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:isScrollContainer="true"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" >
+        android:layout_weight="4"
+        android:background="@drawable/content_bg"
+        android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/storybox"
+            android:id="@+id/txt_title"
             android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@color/yellow"
+            android:gravity="center"
+            android:textSize="25sp" />
+
+        <ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autoLink="all"
-            android:lineSpacingExtra="12dp"
-            android:padding="5dip"
-            android:scrollbars="vertical"
-            android:textColor="@color/black"
-            android:textIsSelectable="true"
-            android:textSize="20sp"
-            android:textStyle="normal" />
-    </ScrollView>
+            android:isScrollContainer="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+
+            <TextView
+                android:id="@+id/storybox"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="all"
+                android:lineSpacingExtra="12dp"
+                android:padding="5dip"
+                android:scrollbars="vertical"
+                android:textColor="@color/black"
+                android:textIsSelectable="true"
+                android:textSize="20sp"
+                android:textStyle="normal" />
+        </ScrollView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/content_banner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+    </RelativeLayout>
 
 </LinearLayout>

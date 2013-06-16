@@ -87,6 +87,9 @@ public class ContentActivity extends Activity implements OnTouchListener {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.content_layout);
 
+		if (Globals.AD_MODE && Globals.NETWORK_ENABLE) {
+			initADView();
+		}
 		initContent();
 		initTouch();
 		initPopWindows();// 初始化菜单
@@ -550,6 +553,38 @@ public class ContentActivity extends Activity implements OnTouchListener {
 		editor.putInt(link, scrollPosition);
 
 		editor.commit();
+
+	}
+
+	private void initADView() {
+
+		m_adView = new GuomobAdView(this, Globals.AD_KEY);
+		m_Relative = (RelativeLayout) findViewById(R.id.content_banner);
+		m_Relative.addView(m_adView);
+
+		m_adView.setOnBannerAdListener(new OnBannerAdListener() {
+
+			// 无网络连接
+			@Override
+			public void onNetWorkError() {
+				// TODO Auto-generated method stub
+				Log.e("GuomobLog", "onNetWorkError");
+			}
+
+			// 加载广告成功
+			@Override
+			public void onLoadAdOk() {
+				// TODO Auto-generated method stub
+				Log.e("GuomobLog", "onLoadAdOk");
+			}
+
+			// 加载广告失败 arg0：失败原因
+			@Override
+			public void onLoadAdError(String arg0) {
+				// TODO Auto-generated method stub
+				Log.e("GuomobLog", "onLoadAdError" + arg0);
+			}
+		});
 
 	}
 
