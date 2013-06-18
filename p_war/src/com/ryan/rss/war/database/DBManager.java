@@ -17,6 +17,10 @@ import android.util.Log;
  * 
  *         2013-4-15
  */
+/**
+ * @author ryanlee
+ * 
+ */
 public class DBManager {
 
 	private static final String LOGTAG = "DBManager";
@@ -29,6 +33,20 @@ public class DBManager {
 	public DBManager(Context context) {
 
 		helper = new DBHelper(context);
+		dbState = false;
+
+	}
+
+	/**
+	 * @param context
+	 * @param name
+	 *            数据库名称 data.db
+	 * @param path
+	 *            数据库文件在SDcard上的路径 "/war/"
+	 */
+	public DBManager(Context context, String name, String path) {
+
+		helper = new DBHelper(context, name, path);
 		dbState = false;
 
 	}

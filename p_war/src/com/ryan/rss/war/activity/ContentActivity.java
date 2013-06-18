@@ -91,7 +91,6 @@ public class ContentActivity extends Activity implements OnTouchListener {
 		if (Globals.AD_MODE && Globals.NETWORK_ENABLE) {
 			initADView();
 
-			
 		}
 		initContent();
 		initTouch();
@@ -315,7 +314,7 @@ public class ContentActivity extends Activity implements OnTouchListener {
 
 	@Override
 	protected void onStop() {
-
+		scrollHandler.removeMessages(LOOP);
 		Log.v(LOGTAG, "onStop()");
 
 		super.onStop();

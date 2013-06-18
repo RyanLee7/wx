@@ -117,8 +117,9 @@ public class ArticleActivity extends Activity implements OnItemClickListener {
 		initPopWindows();// 初始化菜单
 
 		// 初始化数据库管理对象
-		dbManager = new DBManager(ArticleActivity.this);
-
+		//使用sdcard
+		dbManager = new DBManager(ArticleActivity.this, "war.db", "/war/");
+		// dbManager = new DBManager(ArticleActivity.this);
 		if (Globals.prefs_isFirstRun) {
 
 			updateLocalContent();
@@ -279,6 +280,9 @@ public class ArticleActivity extends Activity implements OnItemClickListener {
 			dbList = dbManager.queryFromCategory(categoryList
 					.get(Globals.prefs_categoryIndex));
 			Log.v(LOGTAG, dbList.toString());
+		} else {
+			// 数据库为空，重新加载本地数据
+			updateLocalContent();
 		}
 
 	}
@@ -719,7 +723,7 @@ public class ArticleActivity extends Activity implements OnItemClickListener {
 
 		setting = this.getSharedPreferences("setting", 0);
 
-		Globals.prefs_isFirstRun = setting.getBoolean("isfirstrunv3",
+		Globals.prefs_isFirstRun = setting.getBoolean("isfirstrunv31",
 				Globals.prefs_isFirstRun);
 		Globals.prefs_autoScroll = setting.getBoolean("autoscroll",
 				Globals.prefs_autoScroll);
@@ -742,7 +746,7 @@ public class ArticleActivity extends Activity implements OnItemClickListener {
 
 		SharedPreferences.Editor editor = setting.edit();
 
-		editor.putBoolean("isfirstrunv3", Globals.prefs_isFirstRun);
+		editor.putBoolean("isfirstrunv31", Globals.prefs_isFirstRun);
 		editor.putBoolean("autoscroll", Globals.prefs_autoScroll);
 		editor.putInt("category", Globals.prefs_categoryIndex);
 		editor.putString("link", Globals.prefs_recent_link);
