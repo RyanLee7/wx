@@ -117,8 +117,9 @@ public class ArticleActivity extends Activity implements OnItemClickListener {
 		initPopWindows();// 初始化菜单
 
 		// 初始化数据库管理对象
-		//使用sdcard
-		dbManager = new DBManager(ArticleActivity.this, "war.db", "/war/");
+		// 使用sdcard
+		dbManager = new DBManager(ArticleActivity.this, Globals.DATABASE_NAME,
+				Globals.DATABASE_PATH);
 		// dbManager = new DBManager(ArticleActivity.this);
 		if (Globals.prefs_isFirstRun) {
 

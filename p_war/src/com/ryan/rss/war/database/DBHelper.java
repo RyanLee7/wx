@@ -14,14 +14,28 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DBHelper extends SDcardSQLiteOpenHelper {
 
-	private static final String DATABASE_NAME = "wenxue_rss.db";
+	private static final String DEFAULT_DATABASE_NAME = "data.db";
 	private static final int DATABASE_VERSION = 1;
 
+	/**
+	 * 默认存储在手机中
+	 * 
+	 * @param context
+	 */
 	public DBHelper(Context context) {
-		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		super(context, DEFAULT_DATABASE_NAME, null, DATABASE_VERSION);
 
 	}
 
+	/**
+	 * 优先储存在sdcard中，需指定路径和数据库名
+	 * 
+	 * @param context
+	 * @param name
+	 *            "data.db"
+	 * @param path
+	 *            "/path/"
+	 */
 	public DBHelper(Context context, String name, String path) {
 		super(context, name, null, DATABASE_VERSION, null, path);
 

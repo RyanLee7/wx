@@ -20,6 +20,11 @@ public class Globals {
 	public static boolean NETWORK_ENABLE = false;// 网络状态
 
 	public static final String AD_KEY = "zr2lu80qpxc818";// 果盟广告KEY
+
+	//
+	public final static String DATABASE_PATH = "/war_story/";// 数据库路径
+	public final static String DATABASE_NAME = "war.db";// 数据库名称
+
 	public final static String RSS_URL = "http://www.60hy.com/war/?feed=rss2";
 	// 百度魔兽同人小说吧
 	public final static String WEB_URL = "http://tieba.baidu.com/f?kw=%C4%A7%CA%DE%CD%AC%C8%CB%D0%A1%CB%B5";
